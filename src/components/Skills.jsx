@@ -1,6 +1,3 @@
-import React, { useState } from 'react';
-import { portfolioData } from '../config/data';
-
 const techLogos = {
   JavaScript: (
     <svg className="w-12 h-12" viewBox="0 0 24 24" fill="#F7DF1E">
@@ -181,66 +178,86 @@ const Skills = () => {
         <div className="w-16 h-[3px] bg-gradient-to-r from-dreamy-pink to-dreamy-blue mt-4"></div>
       </div>
 
-      {/* Filter Tabs */}
-      <div className="flex flex-wrap gap-2.5 mb-12 justify-start pb-4 border-b border-white/10">
-        {filterTabs.map((tab) => (
-          <button
-            key={tab.id}
-            onClick={() => setActiveFilter(tab.id)}
-            className={`px-5 py-2.5 rounded-full text-xs font-bold tracking-wide transition-all duration-300 ${
-              activeFilter === tab.id
-                ? 'bg-gradient-to-r from-dreamy-pink to-dreamy-blue text-slate-900 shadow-md'
-                : 'bg-slate-950/80 border border-white/10 text-slate-100 hover:bg-white/10 hover:text-white hover:scale-102'
-            }`}
-          >
-            {tab.label}
-          </button>
-        ))}
-      </div>
+      {/* Unified macOS Code Editor IDE Window */}
+      <div className="w-full bg-slate-950/80 backdrop-blur-md border border-white/15 rounded-3xl overflow-hidden shadow-2xl flex flex-col z-10 relative">
+        
+        {/* macOS Title Bar Controls */}
+        <div className="flex gap-1.5 border-b border-white/10 px-6 py-4 items-center justify-between bg-slate-950/50">
+          <div className="flex gap-1.5 items-center">
+            <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f56]" />
+            <span className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]" />
+            <span className="w-2.5 h-2.5 rounded-full bg-[#27c93f]" />
+            <span className="text-[10px] text-slate-400 font-bold font-mono ml-2">stack_explorer.ide</span>
+          </div>
+          <span className="text-[9px] text-[#ff79c6] font-bold font-mono tracking-widest uppercase">IDE_SESSION_ACTIVE</span>
+        </div>
 
-      {/* Skills Grid */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 transition-all duration-500">
-        {filteredSkills.map((skill) => {
-          const glowColor = hoverGlowColors[skill.name] || "rgba(255,255,255,0.05)";
-          return (
-            <div
-              key={skill.name}
-              className="group relative glass-card p-6 rounded-2xl flex flex-col items-center justify-between h-44 overflow-hidden transition-all duration-300 hover:-translate-y-1.5 shadow-lg"
-            >
-              {/* Radial glow background on hover */}
-              <div 
-                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                style={{
-                  background: `radial-gradient(circle at center, ${glowColor} 0%, transparent 70%)`
-                }}
-              />
+        {/* Tab Selector (Styled as IDE Editor Tabs) */}
+        <div className="flex flex-wrap border-b border-white/10 bg-[#060613]/60 px-4 pt-2 gap-1 justify-start">
+          {filterTabs.map((tab) => {
+            const isActive = activeFilter === tab.id;
+            return (
+              <button
+                key={tab.id}
+                onClick={() => setActiveFilter(tab.id)}
+                className={`px-5 py-2.5 rounded-t-xl text-[10px] font-bold font-mono tracking-wider transition-all duration-300 flex items-center gap-1.5 ${
+                  isActive
+                    ? 'bg-slate-950 border-t-2 border-t-dreamy-pink border-x border-x-white/10 text-white'
+                    : 'text-slate-400 hover:text-slate-200 hover:bg-white/5'
+                }`}
+              >
+                <span className={isActive ? 'text-dreamy-pink' : 'text-slate-500'}>&gt;</span>
+                {tab.label.toUpperCase()}
+              </button>
+            );
+          })}
+        </div>
 
-              {/* Logo Container */}
-              <div className="flex items-center justify-center h-20 w-20 relative z-10 transition-transform duration-500 group-hover:scale-105">
-                {techLogos[skill.name] || (
-                  <div className="w-12 h-12 flex items-center justify-center bg-white/10 border border-white/15 rounded-full text-dreamy-pink font-semibold">
-                    {skill.name.slice(0, 2).toUpperCase()}
+        {/* Skills Grid Pane */}
+        <div className="p-8 md:p-12">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 transition-all duration-500">
+            {filteredSkills.map((skill) => {
+              const glowColor = hoverGlowColors[skill.name] || "rgba(255,255,255,0.05)";
+              return (
+                <div
+                  key={skill.name}
+                  className="group relative glass-card p-6 rounded-2xl flex flex-col items-center justify-between h-44 overflow-hidden transition-all duration-300 hover:-translate-y-1.5 shadow-lg border border-white/10 bg-slate-950/70"
+                >
+                  {/* Radial glow background on hover */}
+                  <div 
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                    style={{
+                      background: `radial-gradient(circle at center, ${glowColor} 0%, transparent 70%)`
+                    }}
+                  />
+
+                  {/* Logo Container */}
+                  <div className="flex items-center justify-center h-20 w-20 relative z-10 transition-transform duration-500 group-hover:scale-105">
+                    {techLogos[skill.name] || (
+                      <div className="w-12 h-12 flex items-center justify-center bg-white/10 border border-white/15 rounded-full text-dreamy-pink font-semibold">
+                        {skill.name.slice(0, 2).toUpperCase()}
+                      </div>
+                    )}
                   </div>
-                )}
-              </div>
 
-              {/* Tech Name & Status */}
-              <div className="text-center z-10 w-full mt-2">
-                <h4 className="text-sm font-bold text-white tracking-wide group-hover:text-dreamy-pink transition-all mb-1">
-                  {skill.name}
-                </h4>
-                
-                {/* Micro level tag */}
-                <div className="inline-block px-3 py-1.5 rounded-full bg-white/10 border border-white/10 text-[9px] font-bold font-mono tracking-widest text-slate-100 uppercase transition-all">
-                  {skillLevels[skill.name] || "Intermediate"}
+                  {/* Tech Name & Status */}
+                  <div className="text-center z-10 w-full mt-2">
+                    <h4 className="text-sm font-bold text-white tracking-wide group-hover:text-dreamy-pink transition-all mb-1">
+                      {skill.name}
+                    </h4>
+                    
+                    {/* Micro level tag */}
+                    <div className="inline-block px-3 py-1.5 rounded-full bg-white/10 border border-white/10 text-[9px] font-bold font-mono tracking-widest text-slate-100 uppercase transition-all">
+                      {skillLevels[skill.name] || "Intermediate"}
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-          );
-        })}
+              );
+            })}
+          </div>
+        </div>
+
       </div>
     </section>
   );
 };
-
-export default Skills;
