@@ -1,0 +1,82 @@
+@import "tailwindcss";
+
+@theme {
+  --color-dreamy-pink: #ff9a9e;
+  --color-dreamy-violet: #fecfef;
+  --color-dreamy-blue: #a1c4fd;
+  --color-dreamy-purple: #c2ffd8;
+  --color-dreamy-bg: #030308;
+  --color-dreamy-card: rgba(10, 10, 25, 0.7);
+  --font-dreamy: 'Inter', system-ui, sans-serif;
+}
+
+@layer base {
+  body {
+    background-color: #030308;
+    color: #f1f5f9;
+    font-family: var(--font-dreamy);
+    overflow-x: hidden;
+  }
+  
+  /* Custom scrollbar matching dreamy theme */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #030308;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(161, 196, 253, 0.4);
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 154, 158, 0.6);
+  }
+}
+
+/* Glassmorphism utility classes */
+.glass-card {
+  background: rgba(10, 10, 25, 0.7);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  box-shadow: 0 15px 40px -10px rgba(0, 0, 0, 0.5);
+}
+
+.glass-card-hover {
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+.glass-card-hover:hover {
+  background: rgba(15, 15, 35, 0.8);
+  border-color: rgba(255, 255, 255, 0.18);
+  box-shadow: 0 20px 50px -5px rgba(161, 196, 253, 0.2);
+  transform: translateY(-4px);
+}
+
+.glass-input {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: #ffffff;
+  transition: all 0.3s ease;
+}
+.glass-input:focus {
+  background: rgba(0, 0, 0, 0.6);
+  border-color: rgba(161, 196, 253, 0.5);
+  box-shadow: 0 0 15px rgba(161, 196, 253, 0.15);
+}
+
+/* Text glow / gradients */
+.text-gradient-dreamy {
+  background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #a1c4fd 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-soft {
+  background: linear-gradient(135deg, #a1c4fd 0%, #c2ffd8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
