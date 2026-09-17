@@ -50,7 +50,8 @@ export const portfolioData = {
       subtitle: "Navigation & Pathfinding Platform",
       description: "An advanced pathfinding and interactive mapping application. It visualizes navigation algorithms in real-time, allowing users to explore different pathing models with interactive nodes and custom grid speeds.",
       tech: ["React", "Canvas API", "GSAP", "TailwindCSS"],
-      github: "https://github.com/ravikaushal11u"
+      github: "https://github.com/ravikaushal11u",
+      live: "https://theway-green.vercel.app/"
     },
     {
       id: "foodio",
@@ -58,7 +59,8 @@ export const portfolioData = {
       subtitle: "Premium Food Delivery Application",
       description: "A highly interactive food discovery and ordering dashboard. Built with customized interactive product cards, advanced sorting filters, and seamless micro-interactions for a premium checkout experience.",
       tech: ["React Native", "TailwindCSS", "Redux Toolkit", "Node.js"],
-      github: "https://github.com/ravikaushal11u"
+      github: "https://github.com/ravikaushal11u",
+      live: null
     },
     {
       id: "stayfinder",
@@ -66,7 +68,8 @@ export const portfolioData = {
       subtitle: "Immersive Hotel Booking Platform",
       description: "A premium hospitality listing and reservation platform. Features interactive map integrations, rich booking interfaces, custom calendar schedules, and a dark glassmorphism dashboard.",
       tech: ["React", "Three.js", "GSAP", "Mapbox"],
-      github: "https://github.com/ravikaushal11u"
+      github: "https://github.com/ravikaushal11u",
+      live: "https://stayfinder-8fr0.onrender.com/"
     }
   ],
 

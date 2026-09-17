@@ -28,19 +28,19 @@ const Projects = () => {
 
   const projectHighlights = {
     theway: [
-      "Dynamic A* & Dijkstra visualization on interactive grids",
-      "Custom path weight controls and adjustable search speed",
-      "Fluid DOM animations for node search expansions"
+      "Dynamic A* & Dijkstra visualizer",
+      "Custom path weight controls",
+      "Fluid DOM expanding animations"
     ],
     foodio: [
-      "Custom layout with card swipe transformations",
-      "Global state management for responsive checkout systems",
-      "Liquid-smooth transition sequences using React Native Reanimated"
+      "Interactive swipe transformations",
+      "Global Redux cart checkout store",
+      "Native Reanimated transitions"
     ],
     stayfinder: [
-      "Mapbox custom markers with floating card tooltips",
-      "Dynamic reservation system with calendar scheduler",
-      "Glassmorphic analytics panel showing custom filter analytics"
+      "Mapbox custom floating tooltips",
+      "Reservation calendar scheduler",
+      "Glassmorphic dashboard panel"
     ]
   };
 
@@ -76,6 +76,7 @@ const Projects = () => {
                 <div
                   onMouseMove={handleMouseMove}
                   onMouseLeave={handleMouseLeave}
+                  onClick={project.live ? () => window.open(project.live, '_blank', 'noopener,noreferrer') : undefined}
                   className="relative w-full aspect-video border border-white/15 bg-[#050510] rounded-2xl overflow-hidden cursor-pointer shadow-2xl transition-all duration-200 ease-out hover:border-white/25 group"
                   style={{ 
                     transformStyle: 'preserve-3d',
@@ -99,7 +100,7 @@ const Projects = () => {
                       <span className="w-2.5 h-2.5 rounded-full bg-[#27c93f]" />
                     </div>
                     <div className="text-[10px] font-mono font-bold text-slate-250 bg-black/40 px-6 py-0.5 rounded border border-white/10 max-w-[200px] truncate">
-                      {project.id}.ravi.dev
+                      {project.live ? project.live.replace('https://', '').replace(/\/$/, '') : `${project.id}.ravi.dev`}
                     </div>
                     <div className="w-8"></div>
                   </div>
@@ -162,79 +163,93 @@ const Projects = () => {
                     )}
                   </div>
 
-                  {/* Scanline Effect (always visible) */}
+                  {/* Scanline Effect */}
                   <div className="absolute inset-0 bg-[linear-gradient(to_bottom,transparent_50%,rgba(255,255,255,0.05)_50%)] bg-[size:100%_4px] pointer-events-none opacity-20" />
 
                   {/* View indicator overlay */}
                   <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none flex items-center justify-center z-30">
                     <span className="text-[10px] text-white bg-slate-950/95 backdrop-blur-md px-3.5 py-1.5 border border-white/15 rounded-full tracking-wider font-bold uppercase shadow-lg">
-                      {project.id === 'theway' ? 'EXPLORE_INTERFACE' : 'COMPILE_MOCKUP'}
+                      {project.live ? 'LAUNCH_LIVE_DEMO' : 'COMPILE_MOCKUP'}
                     </span>
                   </div>
                 </div>
               </div>
 
-              {/* Right Side: Details & Highlights */}
-              <div className="w-full lg:w-[50%] text-left flex flex-col justify-center">
-                <span className="text-xs font-bold text-dreamy-pink tracking-widest uppercase mb-2">
-                  PROJECT_0{index + 1}
-                </span>
-                <h4 className="text-3xl font-extrabold text-white tracking-wide mb-2 hover:text-gradient-dreamy transition-all duration-300">
-                  {project.title}
-                </h4>
-                <h5 className="text-sm font-bold text-dreamy-blue mb-4">
-                  {project.subtitle}
-                </h5>
-                <p className="text-slate-100 font-sans text-md leading-relaxed mb-6 font-medium">
-                  {project.description}
-                </p>
+              {/* Right Side: macOS Style Code Editor Window */}
+              <div className="w-full lg:w-[50%] flex flex-col z-10">
+                <div className="w-full bg-slate-950/80 backdrop-blur-md border border-white/15 p-5 rounded-2xl font-mono text-xs text-slate-100 text-left relative overflow-hidden shadow-2xl flex flex-col">
+                  {/* macOS Title Bar Controls */}
+                  <div className="flex gap-1.5 border-b border-white/10 pb-3 mb-4 items-center justify-between">
+                    <div className="flex gap-1.5 items-center">
+                      <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f56]" />
+                      <span className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]" />
+                      <span className="w-2.5 h-2.5 rounded-full bg-[#27c93f]" />
+                      <span className="text-[10px] text-slate-400 font-bold ml-2">{project.id}.config.json</span>
+                    </div>
+                    <span className="text-[9px] text-dreamy-pink font-bold font-mono tracking-widest">PROJECT_0{index + 1}</span>
+                  </div>
 
-                {/* Challenges Checklist */}
-                {highlights.length > 0 && (
-                  <div className="mb-6 space-y-2.5">
-                    <h6 className="text-[10px] font-bold text-slate-350 tracking-wider uppercase mb-3">Key Integrations</h6>
+                  {/* JSON Code block representation */}
+                  <div className="space-y-1.5 leading-relaxed font-semibold flex-1">
+                    <div><span className="text-[#ff79c6]">const</span> {project.id} = &#123;</div>
+                    <div className="pl-4">title: <span className="text-[#50fa7b]">"{project.title}"</span>,</div>
+                    <div className="pl-4">subtitle: <span className="text-[#50fa7b]">"{project.subtitle}"</span>,</div>
+                    <div className="pl-4">description: <span className="text-[#8be9fd]">"{project.description}"</span>,</div>
+                    
+                    {/* Key Highlights in Array format */}
+                    <div className="pl-4">keyIntegrations: [</div>
                     {highlights.map((h, i) => (
-                      <div key={i} className="flex items-start gap-2.5 text-sm text-slate-100 font-medium">
-                        <Sparkles className="w-3.5 h-3.5 text-dreamy-pink shrink-0 mt-1" />
-                        <span>{h}</span>
+                      <div key={i} className="pl-8 text-[#f1fa8c]">
+                        "{h}"{i < highlights.length - 1 ? ',' : ''}
                       </div>
                     ))}
+                    <div className="pl-4">],</div>
+
+                    {/* Tech stack */}
+                    <div className="pl-4">techStack: [</div>
+                    <div className="pl-8 text-[#8be9fd]">
+                      {project.tech.map((t, idx) => (
+                        <span key={t}>
+                          "{t}"{idx < project.tech.length - 1 ? ', ' : ''}
+                        </span>
+                      ))}
+                    </div>
+                    <div className="pl-4">]{project.live ? ',' : ''}</div>
+                    {project.live && (
+                      <div className="pl-4">
+                        liveDemo: <a href={project.live} target="_blank" rel="noopener noreferrer" className="text-[#50fa7b] hover:underline">"{project.live}"</a>
+                      </div>
+                    )}
+                    <div>&#125;;</div>
                   </div>
-                )}
 
-                {/* Tech tags */}
-                <div className="flex flex-wrap gap-2.5 mb-8">
-                  {project.tech.map((t) => (
-                    <span
-                      key={t}
-                      className="px-3.5 py-1.5 bg-white/10 border border-white/10 text-slate-100 font-semibold text-xs rounded-full"
+                  {/* Operational buttons inside window footer */}
+                  <div className="flex gap-3 border-t border-white/10 pt-4 mt-5">
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 px-5 py-2.5 border border-white/20 bg-white/10 hover:bg-white/20 text-slate-100 hover:text-white text-xs font-bold rounded-full transition-all duration-300 shadow-md"
                     >
-                      {t}
-                    </span>
-                  ))}
-                </div>
-
-                {/* Links */}
-                <div className="flex gap-4">
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 px-5 py-2.5 border border-white/20 bg-white/10 text-slate-100 hover:text-white hover:bg-white/20 text-xs font-bold rounded-full transition-all duration-300 shadow-md"
-                  >
-                    <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                      <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
-                    </svg>
-                    GITHUB_REPO
-                  </a>
-                  <a
-                    href="#"
-                    onClick={(e) => e.preventDefault()}
-                    className="flex items-center gap-2 px-5 py-2.5 border border-white/10 text-slate-350 hover:border-dreamy-pink hover:text-dreamy-pink text-xs font-bold rounded-full transition-all duration-300"
-                  >
-                    <ExternalLink className="w-4 h-4" />
-                    LIVE_DEMO
-                  </a>
+                      GITHUB_REPO
+                    </a>
+                    {project.live ? (
+                      <a
+                        href={project.live}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 px-5 py-2.5 border border-dreamy-pink/40 bg-dreamy-pink/15 hover:bg-dreamy-pink/25 text-white hover:text-white text-xs font-bold rounded-full transition-all duration-300 shadow-lg shadow-dreamy-pink/20 hover:scale-105"
+                      >
+                        <ExternalLink className="w-4 h-4 text-dreamy-pink" />
+                        LIVE_DEMO
+                      </a>
+                    ) : (
+                      <span className="flex items-center gap-2 px-5 py-2.5 border border-white/10 text-slate-500 text-xs font-bold rounded-full cursor-not-allowed">
+                        <ExternalLink className="w-4 h-4" />
+                        LIVE_DEMO
+                      </span>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
