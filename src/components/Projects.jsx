@@ -51,9 +51,8 @@ const Projects = () => {
 
       {/* Heading */}
       <div className="flex flex-col items-start mb-16 text-left">
-        <h2 className="text-xs font-bold tracking-widest text-dreamy-blue uppercase mb-2">
-          03. SELECT WORK & DEMOS
-        </h2>
+        
+        
         <h3 className="text-3xl md:text-4xl font-black tracking-tight text-white m-0">
           FEATURED PROJECTS
         </h3>
