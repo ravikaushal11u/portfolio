@@ -172,9 +172,7 @@ const Skills = () => {
 
       {/* Heading */}
       <div className="flex flex-col items-start mb-12 text-left">
-        <h2 className="text-xs font-bold tracking-widest text-dreamy-blue uppercase mb-2">
-          02. CORE STACK & EXPERTISE
-        </h2>
+     
         <h3 className="text-3xl md:text-4xl font-black tracking-tight text-white m-0">
           LANGUAGES, FRAMEWORKS & ENGINES
         </h3>
