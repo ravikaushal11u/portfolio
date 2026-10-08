@@ -57,14 +57,14 @@ const About = () => {
               </div>
               
               <div className="border-t border-white/5 pt-3">
-                <h5 className="text-[#50fa7b] font-mono text-xs font-bold uppercase tracking-wider mb-1">## Professional Bio</h5>
+    
                 <p className="text-slate-200 font-medium">
                   {portfolioData.about}
                 </p>
               </div>
 
               <div className="border-t border-white/5 pt-3">
-                <h5 className="text-[#8be9fd] font-mono text-xs font-bold uppercase tracking-wider mb-1">## Core Focus</h5>
+                
                 <p className="text-slate-200 font-medium">
                   With expertise in Web Development (creating interactive platforms), Mobile Apps (for seamless portability), and Game Design, I focus on performance, optimization, and stunning animations that elevate digital platforms.
                 </p>
@@ -109,7 +109,7 @@ const About = () => {
               {/* Simple Clean Indicator */}
               <div className="absolute bottom-6 right-6 z-20">
                 <span className="text-[9px] text-white bg-slate-950/90 backdrop-blur-md px-3 py-1 border border-white/15 rounded-full tracking-widest font-bold uppercase shadow-lg">
-                  PORTRAIT_ACTIVE
+                  
                 </span>
               </div>
             </div>
